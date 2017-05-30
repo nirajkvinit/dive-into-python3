@@ -4,7 +4,14 @@ SUFFIXES = {
 }
 
 def approximate_size(size, a_kilobyte_is_1024_bytes = True):
+    '''
+        Convert a file size to human-readable form.
 
+        Keyword arguments:
+            size -- file size in bytes
+            a_kilobyte_is_1024_bytes -- if True (default), use multiples of 1024 if False, use multiples of 1000
+        Returns: string
+    '''
     if size < 0:
         raise ValueError('number must be non-negative')
 
