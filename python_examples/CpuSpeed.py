@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#just a hack
 import time
 
 print("Adding 1 million elements to a list")
