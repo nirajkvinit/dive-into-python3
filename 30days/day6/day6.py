@@ -11,7 +11,7 @@ Team CFE
 """
 
 def make_messages(names, amounts):
-	messages = []
+	#messages = []
 	if len(names) == len(amounts):
 		i = 0
 		today = datetime.date.today()
@@ -19,7 +19,8 @@ def make_messages(names, amounts):
 		for name in names:
 			new_amount = "%.2f" %(amounts[i])
 			new_msg = default_message.format(
-					name = name.title(),
+					#name = name.title(),
+					name = (name[0].upper() + name[1:].lower()),
 					date = date_text,
 					total = new_amount
 				)
