@@ -99,9 +99,9 @@ Team CFE
 		return False
 
 obj = MessageUser()
-obj.add_user("Niraj", 123.32, "nirajkvinit@yahoo.co.in")
-obj.add_user("john", 94.23, "nirajkvinit@gmail.com")
-obj.add_user("Emilee", 124.32, "mail@novamining.com")
+obj.add_user("Niraj", 123.32, "email@example.com")
+obj.add_user("john", 94.23, "email@example.com")
+obj.add_user("Emilee", 124.32, "email@example.com")
 #print(obj.make_messages())
 obj.send_email()
 
