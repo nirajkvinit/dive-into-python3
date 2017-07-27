@@ -102,7 +102,7 @@ def shreyaWords(wordsList):
 					# 30% of total words
 					# Break the loop and exit the program if a word is not found after 1000 iteration
 					if wordNotFoundLoopCount > 1000:
-						print('Sorry! No more words of ' + str(desiredWordLength) + ' characters long are not available.')
+						print('Sorry! Words of ' + str(desiredWordLength) + ' characters long are not available.')
 						
 						# Save exercise file and exit
 						saveExerciseFile(exerciseWordsList)
