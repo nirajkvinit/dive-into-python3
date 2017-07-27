@@ -72,26 +72,26 @@ def shreyaWordsGame(wordsList):
 		# Random Words
 		print('1. Random words.')
 		# Random words where the word begins with a desired letter
-		print('2. Random words of your desired first letter.')
+		print('2. Random words of desired first letter.')
 		# Random words of desired length
-		print('3. Random words of your desired word length.')
+		print('3. Random words of desired word length.')
 
 		print(colorama.Fore.WHITE + colorama.Back.RED + 'Press \'q\' to exit the game.')
 		print(colorama.Style.RESET_ALL)
 
 		gameChoice = str(input('Please input your choice: ')).strip().lower()
 
-		if gameChoice == 'q':
+		if gameChoice == 'q':		# Quit
 			break;
 
-		elif gameChoice == '1':
+		elif gameChoice == '1':		# 1. Random words.
 			shreyaRandomWords(wordsList)
 
-		elif gameChoice == '2':
+		elif gameChoice == '2':		# 2. Random words of desired first letter.
 			pass
 
-		elif gameChoice == '3':
-			pass
+		elif gameChoice == '3':		# 3. Random words of desired word length.
+			shreyaRandomWordsByLength(wordsList)
 
 		else:
 			input('Your input was incorrect! Press \'Enter\' key to try again!')
@@ -101,20 +101,100 @@ def shreyaWordsGame(wordsList):
 	print(colorama.Fore.WHITE + colorama.Back.MAGENTA + 'Thank you for playing Shreya\'s Game! Goodbye!')
 	print(colorama.Style.RESET_ALL)
 
+def shreyaRandomWordsByLength(wordsList):
+	exerciseList = getExerciseList()
+
+	while True:
+		try:			
+			clearScreen()
+			desiredWordLength = int(input('Please input a number between 1 & 14: '))
+			
+			# We are only going to generate words of minimum 1 and 14 letters
+			if desiredWordLength > 0 or desiredWordLength <= 14:
+				break;
+		
+		# In exception We will just ask the user to input correct number again
+		except Exception as ex:		
+			#print('Error: ' + str(ex))
+	
+	while True:
+		# Loop should not run indefinitely.
+		wordNotFoundLoopCount = 0
+
+		# get a random word
+		foundWord = getRandomWord(wordsList)
+
+		if(len(foundWord) == desiredWordLength):
+
+			# apend the found word to exercise list
+			getExerciseList(exerciseList, foundWord)
+			# Clear screen
+			clearScreen()
+			print(colorama.Fore.WHITE + colorama.Back.CYAN + 'Random Words Game of ' + desiredWordLength + ' word length!')
+			print(colorama.Style.RESET_ALL)
+			print('\n' * 3)
+			print('{0: ^20}'.format(foundWord))
+			print('\n' * 3)
+
+			# Since word has been found. Reset the counter
+			wordNotFoundLoopCount = 0
+			
+			gameChoice = str(input(colorama.Fore.WHITE + colorama.Back.RED + 'Press \'Enter\' to continue or \'q\' to exit the game: ')).lower()
+			print(colorama.Style.RESET_ALL)
+			
+			if gameChoice == 'q':
+				break;
+
+		else:
+			# Increase the counter if a word is not found
+			wordNotFoundLoopCount += 1
+
+		# 30% of total words
+		# Break the loop and exit the program if a word is not found after 1000 iteration
+		if wordNotFoundLoopCount > 1000:
+			print('\n' * 2)
+			print('Sorry! No more words of ' + str(desiredWordLength) + ' characters long are not available.')
+			print('\n' * 2)
+			# will never reach here
+			break;
+
+
+	saveExerciseFile(exerciseList)
+	return None
+
 
 def shreyaRandomWords(wordsList):
+	exerciseList = getExerciseList()
 	while True:
+		# get a random word
+		foundWord = getRandomWord(wordsList)
+		# apend the found word to exercise list
+		getExerciseList(exerciseList, foundWord)
+		# Clear screen
 		clearScreen()
 		print(colorama.Fore.WHITE + colorama.Back.CYAN + 'Random Words Game!')
 		print(colorama.Style.RESET_ALL)
 		print('\n' * 3)
-		print('{0: ^20}'.format(getRandomWord(wordsList)))		
+		print('{0: ^20}'.format(foundWord))
 		print('\n' * 3)
 		gameChoice = str(input(colorama.Fore.WHITE + colorama.Back.RED + 'Press \'Enter\' to continue or \'q\' to exit the game: ')).lower()
 		print(colorama.Style.RESET_ALL)
 
 		if gameChoice == 'q':
 			break;
+
+	saveExerciseFile(exerciseList)
+	return None
+
+def getExerciseList(exerciseList=None, foundWord=None):
+	if exerciseList is None:
+		return []
+	elif foundWord is None:
+		return exerciseList
+	else:
+		if foundWord not in exerciseList:
+			exerciseList.append(foundWord)
+		return exerciseList
 
 def saveExerciseFile(exerciseWordsList):
 	try:
