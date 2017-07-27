@@ -1,5 +1,6 @@
 import sys, os, time
-#load sibline directory into memory for importing a python file
+
+#load sibling directory into memory for importing a python file
 sys.path.append(os.path.abspath('../example'))
 import humansize
 
