@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://petrikonkka.com/en/web-development-with-django-part-1/ -->
+<html lang="en-GB">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Web Application Development with Django - Part 1 - Petri Konkka</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>		
+
+		<div class="post-content">
+			<h1>What is Django?</h1>
+			<p>Django is an open-source web framework written in Python. The primary goal of Django is to ease the creation of complex, database-driven websites. Django emphasises reusability of components, rapid development and the principle “don’t repeat yourself”. Django provides also an administrative CRUD (create,read,update,delete) interface.</p>
+			<p>The core Django framework follows MVC architecture.It consists of an object-relational mapper (ORM) that mediates between data models (defined as Python classes) and a database (“Model”), a system for processing HTTP requests with a web tempting system (“View”), and regular-expression-based URL dispatcher (“Controller”).</p>
+			<p>Django core framework contains also:</p>
+			<ul>
+				<li>standalone web server for development and testing</li>
+				<li>form serialisation and validation system the can translate forms and values suitable for storage in the database</li>
+				<li>template system that utilises the concept of inheritance</li>
+				<li>caching framework</li>
+				<li>support for middleware classes</li>
+				<li>internationalisation system</li>
+				<li>serialisation system that can produce and read XML and JSON representations of Django model instances</li>
+			</ul>
+			<p>The main Django distribution package includes also the following apps:</p>
+			<ul>
+				<li>authentication system</li>
+				<li>dynamic administrative interface</li>
+				<li>tools for generating RSS and Atom syndication feeds</li>
+				<li>tools for generating Google sitemaps</li>
+				<li>built-in security features for typical web attacks, most of them are turned on by default</li>
+				<li>framework for creating GIS applications</li>
+			</ul>
+			<hr>
+			<h2>Django extensibility</h2>
+			<p>Django’s configuration system allows third party code to be plugged into a project, if it follows the reusable app conventions. More than 2500 packages are available to extend the framework’s original behaviour, providing solutions to issues like registration, search, API provision and consumption etc.</p>
+			<h2>Django server requirements</h2>
+			<p>Django can be run in conjunction with Apache, NGINX using WSGI, Gunicorn or Cherokee using flup (a Python module). Officially Django supports four database backends: PostgresSQL, MySQL, SQLite and or Oracle. Unofficially Django supports also other database backends like Microsoft SQL Server, IBM DB2, SQL Anywhere and Firebird. Also NoSQL databases (e.g. MongoDB) are supported in a way.</p>
+			<hr>			
+			<h3>Notes: </h3>
+			<ol>
+				<li>Install Python (no need to do this if you are on Mac, like me). Anyways I installed the latest python ver 3</li>
+				<li>Install Django: <a href="https://pip.pypa.io/en/stable/">pip</a> install django (at command prompt or terminal)</li>
+				<li>Create Django project: django-admin start project myfirstdjango</li>
+				<li>List of available commands, run: python manage.py</li>
+				<li>Example: run a server: python manage.py runserver (by default server is running at localhost:8000)</li>
+			</ol>
+			<h3>Django Project Files</h3>
+			<ul>
+				<li>myfirsrdjango/__init__.py
+					<ul>
+						<li>Tells Django where a project folder is</li>
+						<li>Do NOT edit</li>
+					</ul>
+				</li>
+				<li>manage.py
+					<ul>
+						<li>Runs commands</li>
+						<li>Do NOT edit</li>
+					</ul>
+				</li>
+				<li>myfirstdjango/wsgi.py
+					<ul>
+						<li>Provides a hook for web servers</li>
+						<li>Do NOT edit</li>
+					</ul>
+				</li>
+				<li>&nbsp;myfirstdjango/settings.py
+					<ul>
+						<li>Configures Django</li>
+					</ul>
+				</li>
+				<li>myfirstdjango/urls.py
+					<ul>
+						<li>Routes requests based on URL</li>
+					</ul>
+				</li>
+			</ul>
+			<h3>Django Apps</h3>
+			<ul>
+				<li>folder with Python files</li>
+				<li>app is a component</li>
+				<li>app fits a specific purpose (e.g. blog, forum, wiki)</li>
+			</ul>
+			<h3>Pieces of an App</h3>
+			<ul>
+				<li><strong>models.py</strong>: data layer (structure of database tables)</li>
+				<li><strong>admin.py</strong>: administrative interface (database interface for the admin)</li>
+				<li><strong>views.py</strong>: control layer (HTTP requests)</li>
+				<li><strong>tests.py</strong>: tests the app</li>
+				<li><strong>migrations</strong>: database migration files</li>
+			</ul>
+			<h3>Creating a new django app</h3>
+			<ul>
+				<li>run: python manage.py startapp myfirstdjango</li>
+				<li>edit: settings.py: add new app (myfirstdjango) at the end of INSTALLED_APPS tuple</li>
+			</ul>
+			<h3>Django Settings</h3>
+			<ul>
+				<li>INSTALLED_APPS
+					<ul>
+						<li>New Django apps</li>
+					</ul>
+				</li>
+				<li>TEMPLATES
+					<ul>
+						<li>New templates</li>
+					</ul>
+				</li>
+				<li>STATICFILES_DIRS
+					<ul>
+						<li>New static assets (e.g. CSS and Javascript)</li>
+					</ul>
+				</li>
+				<li>DEBUG
+					<ul>
+						<li>By default debug is on, when deploying to production change it to false</li>
+					</ul>
+				</li>
+				<li>DATABASES
+					<ul>
+						<li>Default database is SQLite</li>
+						<li>When deploying to production, database is better to be something else (like PostgresSQL, MySQL)</li>
+					</ul>
+				</li>
+			</ul>
+			<h3>Database Migrations</h3>
+			<ul>
+				<li>Adding a Model</li>
+				<li>Adding a Field</li>
+				<li>Removing a Field</li>
+				<li>Changing a Field</li>
+			</ul>
+			<h4>Migrations commands</h4>
+			<ul>
+				<li>python manage.py makemigrations
+					<ul>
+						<li>generates migration files</li>
+						<li>uses current models fields and database tables</li>
+					</ul>
+				</li>
+				<li>python manage.py migrate
+					<ul>
+						<li>runs all migrations that have not run yet</li>
+					</ul>
+				</li>
+			</ul>
+			<h3>Django admin</h3>
+			<ol>
+				<li>Create first superuser: python manage.py createsuperuser</li>
+				<li>Start local server: python manage.py runserver</li>
+				<li>Open a browser and enter localhost:8000 to the URL field and hit enter</li>
+				<li>Login as a superuser</li>
+				<li>Now you can add items and users to the database</li>
+			</ol>
+			<h3>Querying data with Django ORM</h3>
+			<ul>
+				<li>Run: python manage.py shell</li>
+				<li>Run e.g. the following to check that code works correctly:
+					<ul>
+						<li>items = Items.objects.all()</li>
+						<li>item = items[0]</li>
+						<li>item.title</li>
+						<li>item.amount</li>
+						<li>item.id</li>
+						<li>Item.objects.filter(amount=0)[0].title</li>
+					</ul>
+				</li>
+			</ul>
+			<h3>URLs, Views and Templates</h3>
+			<ul>
+				<li>URLs: urls.py</li>
+				<li>Views: views.py</li>
+				<li>Templates: templates folder</li>
+			</ul>
+			<h3>CSS and Javascript</h3>
+			<ul>
+				<li>settings.py: Static files setting</li>
+			</ul>			
+			<hr>
+			<h2>Links</h2>
+			<ul>
+				<li>Source code: <a href="https://github.com/pkonkka/myfirstdjango">Github</a></li>
+				<li>Django downloads &amp; documentation: <a href="https://www.djangoproject.com/" target="_blank">Django Project</a></li>
+				<li>Django extensions:&nbsp;<a href="https://djangopackages.org/" target="_blank">Django Package</a></li>
+			</ul>
+		</div>
+	</body>
+</html>
