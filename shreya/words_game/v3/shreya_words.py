@@ -291,7 +291,7 @@ def random_word_any(words_list):
 		print_found_word(found_word)
 		str_message = colorama.Fore.WHITE + colorama.Back.RED
 		str_message += "Press 'Enter' to continue or 'q' to exit the game: "
-		game_choice = str(input()).lower()
+		game_choice = str(input(str_message)).lower()
 		print(colorama.Style.RESET_ALL)
 		if game_choice == 'q':
 			break
