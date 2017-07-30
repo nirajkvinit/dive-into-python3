@@ -26,7 +26,7 @@ def index():
             'December': {'min': 36, 'max': 45, 'rain': 6.94},}
 	highlight = {'min': 40, 'max': 80, 'rain': 5}
 	return render_template(
-            'weather.html',
+            'weather2.html',
             city='Portland, OR',
             months=months,
             weather=weather,

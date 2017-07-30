@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Average</title>
+	</head>
+	<body>
+		<h1>Weather average!</h1>
+		<h2>{{ city }}</h2>
+		<hr>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Min</th>
+					<th>Max</th>
+					<th>Rainfall</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for month in months %}
+					<tr>
+						<td>{{ month }}</td>
+						<td>
+							{% set h1 = weather[month]['min'] <= highlight['min'] %}
+							{% if h1 %}<b>{% endif %}
+								{{ weather[month]['min'] }}						
+							{% if h1 %}</b>{% endif %}
+						</td>
+						<td>
+							{% set h1 = weather[month]['max'] >= highlight['max'] %}
+							{% if h1 %}<b>{% endif %}
+								{{ weather[month]['max'] }}
+							{% if h1 %}</b>{% endif %}
+						</td>
+						<td>
+							{% set h1 = weather[month]['rain'] >= highlight['rain'] %}
+							{% if h1 %}<b>{% endif %}
+								{{ weather[month]['rain'] }}
+							{% if h1 %}</b>{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
