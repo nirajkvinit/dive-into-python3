@@ -28,11 +28,17 @@ def index():
             'December': {'min': 36, 'max': 45, 'rain': 6.94},}
 	highlight = {'min': 40, 'max': 80, 'rain': 5}
 	return render_template(
-            'weather3.html',
+            'weather6.html',
             city='Portland, OR',
             months=months,
             weather=weather,
             highlight=highlight)
+
+
+@app.errorhandler(404)
+def not_found(e):
+      ''' page not found request handler '''
+      return render_template('404.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)

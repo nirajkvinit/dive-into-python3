@@ -1,9 +1,11 @@
 ''' weather.py flask example '''
 from flask import Flask
 from flask import render_template
+from flask.ext.bootstrap import Bootstrap
 
 # pylint: disable=invalid-name
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 
 @app.route('/')
@@ -26,11 +28,17 @@ def index():
             'December': {'min': 36, 'max': 45, 'rain': 6.94},}
 	highlight = {'min': 40, 'max': 80, 'rain': 5}
 	return render_template(
-            'weather2.html',
+            'weather7.html',
             city='Portland, OR',
             months=months,
             weather=weather,
             highlight=highlight)
+
+
+@app.errorhandler(404)
+def not_found(e):
+      ''' page not found request handler '''
+      return render_template('404.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)
