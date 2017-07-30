@@ -1,0 +1,1 @@
+penalty,pot,ago,lab,safety,afternoon,stability,continued
