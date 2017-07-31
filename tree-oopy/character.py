@@ -49,4 +49,5 @@ class Character(Combat):
 			self.hit_points += 1
 
 	def leveled_up(self):
+		''' after gaining experience, levelup function inceases   '''
 		return self.experience >= 5
