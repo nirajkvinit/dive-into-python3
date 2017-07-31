@@ -1,27 +1,33 @@
+''' Monster Game Main class '''
 import sys
 from character import Character
 from monster import Dragon
 from monster import Goblin
 from monster import Troll
 
+
 class Game:
+	''' Main Class where game is being played '''
 
 	def setup(self):
+		''' setup the game '''
 		self.player = Character()
 		self.monsters = [
-			Goblin(),
-			Troll,
-			Dragon(),
-		]
+                    Goblin(),
+                    Troll(),
+                    Dragon(),]
 		self.monster = self.get_next_monster()
 
+
 	def get_next_monster(self):
-		try:			
+		''' Get a new monster from the monsters list '''
+		try:
 			return self.monsters.pop()
 		except IndexError:
 			return None
 
 	def monster_turn(self):
+		''' Monster's turn in the game '''
 		# check to see if the monster attacks
 		if self.monster.attack():
 			# if so tell the player
@@ -46,41 +52,47 @@ class Game:
 
 
 	def player_turn(self):
+		''' player's turn in the game '''
+		# let the player attack, rest, or quit
 		player_choice = input("[A]ttack, [R]est, [Q]uit? ").lower()
+
+		# if they attack:
 		if player_choice == 'a':
 			print("You're attacking {}!".format(self.monster))
-
+			# see if the attack is successful
 			if self.player.attack():
+				# if so, see if the monster dodges
 				if self.monster.dodge():
+					# if dodged, print that
 					print("{} dodged your attack! ".format(self.monster))
 				else:
 					if self.player.leveled_up():
+						# if not dodged, substract the right num of hit points from the monster
 						self.monster.hit_points -= 2
 					else:
+						# if not dodged, substract the right num of hit points from the monster
 						self.monster.hit_points -= 1
-
 					print("You hit {} with your {}!".format(self.monster, self.player.weapon))
 			else:
+				# if not a good attack, tell the player
 				print("You missed!")
+		# if the rest:
 		elif player_choice == 'r':
+			# call the player.rest() method
 			self.player.rest()
 		elif player_choice == 'q':
+			# if they quit, exit the game
 			sys.exit()
 		else:
-			self.player_turn()
-		# let the player attack, rest, or quit
-		# if they attack:
-			# see if the attack is successful
-				# if so, see if the monster dodges
-					# if dodged, print that
-					# if not dodged, substract the right num of hit points from the monster
-				# if not a good attack, tell the player
-			# if the rest:
-				# call the player.rest() method
-			# if they quit, exit the game
 			# if they pick anything else, re-run this method
+			self.player_turn()
+
 
 	def cleanup(self):
+		''' after a monster is killed
+			add monster's experience to player's experience
+			and get new monster
+		'''
 		if self.monster.hit_points <= 0:
 			self.player.experience += self.monster.experience
 			print("You killed {}!".format(self.monster))
@@ -88,6 +100,7 @@ class Game:
 
 
 	def __init__(self):
+		''' setup and play the game '''
 		self.setup()
 		while self.player.hit_points and (self.monster or self.monsters):
 			print("\n"+"="*20)
@@ -105,4 +118,4 @@ class Game:
 		sys.exit()
 
 
-Game()		
+Game()
