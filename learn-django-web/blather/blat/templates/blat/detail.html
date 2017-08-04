@@ -1,0 +1,9 @@
+<dl>
+	<dd>{{ blat.text }}</dd>
+	<dt>
+		{{ blat.created_on }}
+		{% if blat.via %}
+		<a href="{{ blat.via }}">/via</a>
+		{% endif %}
+	</dt>
+</dl>
