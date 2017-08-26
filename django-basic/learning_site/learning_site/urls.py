@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.home),
-	url(r'^courses/', include('courses.urls')),
+	url(r'^courses/', include('courses.urls', namespace='courses')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
